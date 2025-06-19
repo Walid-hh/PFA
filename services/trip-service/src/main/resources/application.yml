@@ -1,0 +1,51 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: covoiturage-digitalise-trip-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/covoiturage_trips
+    username: covoiturage_user
+    password: covoiturage_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  security:
+    jwt:
+      secret: mySecretKey123456789012345678901234567890
+      expiration: 86400000 # 24h en millisecondes
+
+# Configuration des logs
+logging:
+  level:
+    com.covoituragedigitalise.trip: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Actuator pour monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# Configuration JWT
+jwt:
+  secret: CovoiturageDigitaliseSecretKey2024VeryLongKey
+  expiration: 86400000
